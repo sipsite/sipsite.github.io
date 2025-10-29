@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUN Yi Xiu - Personal Page</title>
+    <style>
+        /* Global Styles */
+        :root {
+            /* 定义主色调（浅绿色） */
+            --primary-color: #26a69a; 
+            
+            /* 定义背景色（浅色） */
+            --light-background: #e0f2f1;
+            
+            /* 定义文字颜色（深色） */
+            --text-color: #333;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8; /* Light gray background */
+            color: black;/* #333 */
+            line-height: 1.6;
+        }
+
+        /* Layout Container */
+        .container {
+            display: flex;
+            min-height: 100vh; /* Ensure content fills the viewport height */
+            max-width: 1200px; /* Limit maximum width */
+            margin: 0 auto; /* Center the container */
+            background-color: #fff; /* Main content white background */
+            box-shadow: 0 0 10px rgba(0,0,0,0.05); /* Soft shadow */
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px; /* Sidebar width */
+            background-color: #e0f2f1; /* Light green background */
+            padding: 2em;
+            box-sizing: border-box; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex-shrink: 0; /* Prevent sidebar from shrinking */
+        }
+
+        .sidebar h2 {
+            color: #26a69a; /* Deeper green color */
+            margin-top: 0;
+            margin-bottom: 0.5em;
+        }
+
+        .profile-photo {
+            width: 150px; /* Photo width */
+            height: 150px; /* Photo height */
+            border-radius: 50%; /* Circular photo */
+            object-fit: cover; 
+            margin-bottom: 1.5em;
+            border: 3px solid #b2dfdb; /* Light green border */
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 2em;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.8em;
+        }
+
+        .sidebar-nav a {
+            text-decoration: none;
+            color: #26a69a; /* Link color */
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-nav a:hover {
+            color: #43C59E; /* Hover color */
+        }
+
+        /* Main Content Area Styles */
+        .main-content {
+            flex-grow: 1; /* Main content takes remaining space */
+            padding: 2em 3em;
+            box-sizing: border-box;
+        }
+
+        .main-content h1 {
+            color: #26a69a;
+            border-bottom: 2px solid #b2dfdb; /* Title underline */
+            padding-bottom: 0.5em;
+            margin-top: 0;
+        }
+
+        .main-content h2 {
+            color: #4db6ac; /* Slightly darker title color */
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+        }
+
+        .main-content p {
+            margin-bottom: 1em;
+            max-width: 700px; /* Limit paragraph width for readability */
+        }
+
+        .main-content ul {
+            margin-left: 1.5em;
+            margin-bottom: 1em;
+        }
+
+        .main-content li {
+            margin-bottom: 0.5em;
+        }
+
+        a {
+            color: #26a69a;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #43C59E; /*#00796b */
+            text-decoration: underline;
+        }
+
+        .rednote-link {
+            font-weight: bold;
+            color: #26a69a; /* Red emphasis for Xiaohongshu link */
+        }
+
+        /* Mobile Adaptation */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Stack sidebar and content vertically on small screens */
+            }
+            .sidebar {
+                width: 100%; /* Full width sidebar */
+                padding: 1.5em;
+            }
+            .main-content {
+                padding: 1.5em 2em;
+            }
+            .sidebar-nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 1em;
+            }
+            .sidebar-nav li {
+                margin: 0.5em 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            
+<img src="photo.jpg" alt="SUN Yi Xiu's Photo" class="profile-photo"> 
+            <h2>SUN Yi Xiu</h2>
+            <!--
+            <p>DSCT Year 2 Student at HKUST</p>
+            -->
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#research">Research Interest</a></li>
+                    <li><a href="#hobbies">Hobbies</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#language">Language Proficiency</a></li>
+                    <li><a href="#fun-facts">Fun Facts</a></li>
+                    <li><a href="#contact">Contact Info</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="about">
+                <h1>Hi there!</h1>
+                
+                <p>I am SUN Yi Xiu (孙一修), an HKUST student (Class of 2028) majoring in Data Science and Technology (DSCT).</p>
+                <p>
+                    Here's my <a href="https://www.xiaohongshu.com/user/profile/5eeb51dd0000000001001ef0" target="_blank" class="rednote-link">Xiaohongshu</a> account. 
+                </p>
+                <p>
+                    <strong>Pleeeeeease talk to me</strong> if you are also interested in CS / AI research, or if you are self-studying AI! Or any other thing.
+                </p>
+            </section>
+
+            <section id="research">
+                <h2>Current Research Interest</h2>
+                <p>EEG decoding.</p>
+            </section>
+
+
+            <section id="hobbies">
+                <h2>Hobbies</h2>
+                <ul>
+                    <li>Gym</li>
+                    <li>Listening to music (Pink Floyd, King Crimson, toe, etc.)</li>
+                </ul>
+            </section>
+
+            <section id="language">
+                <h2>Language Proficiency</h2>
+                <ul>
+                    <li>Mandarin - Native</li>
+                    <li>English - General</li>
+                </ul>
+            </section>
+            <section id="projects">
+                <h2>Experience</h2>
+                <ul>
+                    <!--
+                    <li>Our 2025 GenAI Hackathon project: confidential now.</li>
+                    -->
+                </ul>
+                <ul>
+                    <li>Here are the <a href="courses_taken.html">courses</a> I have taken or am currently taking.</li>
+                </ul>
+
+            </section>
+            
+            <section id="fun-facts">
+                <h2>Fun Facts</h2>
+                <ul>
+                    <li>mbti: infp<img src="infp.svg" alt="INFP icon" width="20" height="20"></li>
+                    <li>Alternative names: 兰可人, LKR, 李可然.</li>
+                    <!--
+                    <li>Welcome to play my <a href="2.html">game</a> (which is a group project of COMP4021).</li>
+                    -->
+                </ul>
+                
+                
+
+            <section id="contact">
+                <h2>Contact Info</h2>
+                <p>Email: <a href="mailto:ysunem@connect.ust.hk">ysunem@connect.ust.hk</a></p>
+                <p>WeChat: You can ask me through email.</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
