@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+<svg id="mySVG" width="3000" height="1500" style="border:1px solid #ccc;">
+<text id="score" x="50%" y="8%" font-size="100" text-anchor="middle" dominant-baseline="middle">0:0</text>
+<line id="left_board" x1="0" x2="0" y1="0" y2="1500" stroke="#AED9E0" stroke-width="20"></line>
+<line id="left_board" x1="3000" x2="3000" y1="0" y2="1500" stroke="#F7C7DB" stroke-width="20"></line>
+<text id="game_over" display="none" x="50%" y="50%" font-size="100" text-anchor="middle" dominant-baseline="middle">GAME OVER</text>
+</svg>
+
+<script>
+    const svgns = "http://www.w3.org/2000/svg";
+    function game_over_show() {
+        $("#game_over").fadeIn();
+    }
+    function check_gameover(cx, cy) {
+        if(cx < 0 || cx > 3000) return 1;
+        if(cy < 0 || cy > 1500) return 1;
+        return 0;
+    }
+
+    let svg_height = 1500;
+    let svg_width = 3000;
+    let unit_0 = 120;
+    let max_v0 = unit_0 * 4;
+    let t = 5;
+    let p_r = 30;
+    let w_r = 70;
+    let b_r = 20;
+
+    let player_count = 0;
+    let player_color = ["skyblue", "#FFA69E", "#70A9A1", "#B8F2E6"]; // #D6F599
+    let player_key = [['a', 'd', 'w', 's', 0], [37, 39, 38, 40, 1],  ['j', 'l', 'i', 'k', 0], ['p', ']', '-', '[', 0]];
+    let player_position = [[500, 500, 400, 400], [2500, 500, 2600, 400], [500, 1000, 400, 1100], [2500, 1000, 2600, 1100]];
+    function create_player() {
+        const svg = $("#mySVG");
+        let p = $(document.createElementNS(svgns, "circle"));
+        p.attr({cx: player_position[player_count][0], cy: player_position[player_count][1], 
+            r: p_r, stroke: "black", "stroke-width": 2,
+            fill: player_color[player_count]});
+        p.appendTo($("#mySVG"));
+        let pd = {
+            sx: 0,
+            sy: 0
+        };
+        let wd = {
+            sx: 0,
+            sy: 0
+        }
+
+        let w = $(document.createElementNS(svgns, "circle"));
+        w.attr({cx: player_position[player_count][2], cy: player_position[player_count][3], 
+            r: w_r, stroke: "black", "stroke-width": 2,
+            fill: "white"});
+        w.appendTo($("#mySVG"));
+        let l = $(document.createElementNS(svgns, "line"));
+        l.attr({stroke: "black", "stroke-width": 2});
+        l.appendTo($("#mySVG"));
+        function f(c, d, check_game_over_01) {
+            let cx = parseFloat(c.attr("cx"));
+            let cy = parseFloat(c.attr("cy"));
+            c.attr("cx", cx + d.sx * t / 1000);
+            c.attr("cy", cy + d.sy * t / 1000);
+            if(!check_game_over_01) return 0;
+            if(check_gameover(parseFloat(c.attr("cx")), parseFloat(c.attr("cy")))) {
+                game_over_show();
+                return 1;
+            }
+            return 0;
+        }
+        function update_w_speed(c, w, d) {
+            let cx = parseFloat(c.attr("cx"));
+            let cy = parseFloat(c.attr("cy"));
+            let wx = parseFloat(w.attr("cx"));
+            let wy = parseFloat(w.attr("cy"));
+            if(Math.pow(cx-wx, 2) + Math.pow(cy-wy, 2) > Math.pow(200, 2)) {
+                let r1 = Math.pow(cx-wx, 2) + Math.pow(cy-wy, 2);
+                let r2 = Math.pow(200, 2);
+                //r2 = ((r2/r1) ** 0.5) * r1;
+                let co = ((r1-r2) / r1) ** 1.2;
+                let kk = 0.003;
+                d.sx += kk * co * t * unit_0 * (cx-wx);
+                d.sy += kk * co * t * unit_0 * (cy-wy);
+            }
+        }
+        function update_friction(d) {
+            if(d.sx == 0 && d.sy == 0) return ;
+            let co = 1 / ((d.sx ** 2 + d.sy ** 2) ** 0.5);
+            let kk = -0.001; //-0.003
+            d.sx += kk * co * t * unit_0 * d.sx;
+            d.sy += kk * co * t * unit_0 * d.sy;
+        }
+        function update_line(p, w, l) {
+            l.attr("x1", parseFloat(p.attr("cx")));
+            l.attr("y1", parseFloat(p.attr("cy")));
+            l.attr("x2", parseFloat(w.attr("cx")));
+            l.attr("y2", parseFloat(w.attr("cy")));
+        }
+
+        function update_all_about_the_player() {
+            f(w, wd, 0);
+            let flag = f(p, pd, 1);
+            update_w_speed(p, w, wd);
+            update_friction(wd);
+            update_line(p, w, l);
+            return flag;
+        }
+
+        update_line(p, w, l);
+        player_count ++;
+        return {
+            f: f,
+            update_w_speed: update_w_speed,
+            update_friction: update_friction,
+            update_line: update_line,
+            update_all_about_the_player: update_all_about_the_player,
+            p: p,
+            w: w,
+            pd: pd,
+            wd: wd
+        };
+    }
+
+
+    let num_player = 2;
+    let player = [];
+    //37, 39, 38, 40
+    let left_score = 0, right_score = 0;
+
+
+    function set_key() {
+        $(document).on("keydown", function(e) {
+            for(let i = 0; i <= player_count - 1; i ++) {
+                if(player_key[i][4] == 1) {
+                    if(e.keyCode == player_key[i][0]) {
+                        player[i].pd.sx -= unit_0;
+                    }
+                    if(e.keyCode == player_key[i][1]) 
+                        player[i].pd.sx += unit_0;
+                    if(e.keyCode == player_key[i][2]) 
+                        player[i].pd.sy -= unit_0;
+                    if(e.keyCode == player_key[i][3]) 
+                        player[i].pd.sy += unit_0;
+                }
+                else {
+                    if(e.key == player_key[i][0])
+                        player[i].pd.sx -= unit_0;
+                    if(e.key == player_key[i][1]) 
+                        player[i].pd.sx += unit_0;
+                    if(e.key == player_key[i][2]) 
+                        player[i].pd.sy -= unit_0;
+                    if(e.key == player_key[i][3]) 
+                        player[i].pd.sy += unit_0;
+                }
+                player[i].pd.sx = Math.min(player[i].pd.sx, max_v0);
+                player[i].pd.sy = Math.min(player[i].pd.sy, max_v0);
+                player[i].pd.sx = Math.max(player[i].pd.sx, -max_v0);
+                player[i].pd.sy = Math.max(player[i].pd.sy, -max_v0);
+            }
+        })
+    }
+
+    let ball_count = 0;
+    
+    function create_ball() {
+        const svg = $("#mySVG");
+        let create_time = performance.now();
+        console.log(performance.now());
+        let exist = 1;
+        let just_collided = [];
+        for(let i = 0; i <= player_count - 1; i ++) {
+            just_collided[i] = [];
+            just_collided[i][0] = just_collided[i][1] = performance.now() - 100000;
+        }
+        let index = ball_count;
+        let b = $(document.createElementNS(svgns, "circle"));
+        let from_top = (Math.random() > 0.5) * 2 - 1;
+        b.attr({cx: Math.random() * 1000 + 1000, cy: 750 - from_top * 850, 
+            r: 15, 
+            fill: "grey"});//#CFD7C7
+        b.appendTo($("#mySVG"));
+        let co_central = 2;
+        let x_range = 100;
+        let y_base = 200, y_range = 100;
+        let bd = {
+            sx: (Math.random() * (x_range * 2)) - x_range,
+            sy: ((Math.random() * ((y_range)**co_central)) ** (1/co_central) + y_base) * from_top,
+        }
+        function f(c, d, check_game_over_01) {
+            let cx = parseFloat(c.attr("cx"));
+            let cy = parseFloat(c.attr("cy"));
+            c.attr("cx", cx + d.sx * t / 1000);
+            c.attr("cy", cy + d.sy * t / 1000);
+            if(!check_game_over_01) return 0;
+            if(check_gameover(parseFloat(c.attr("cx")), parseFloat(c.attr("cy")))) {
+                game_over_show();
+                return 1;
+            }
+            return 0;
+        }
+        function check_collision() {
+            let check_player = 0;
+            let check_weapon = 1;
+            let less_bug = 0;
+            let t00 = 2000;
+            for(let i = 0; i <= player_count - 1; i ++) {
+                let locx = parseFloat(player[i].p.attr("cx")) - parseFloat(b.attr("cx")),
+                    locy = parseFloat(player[i].p.attr("cy")) - parseFloat(b.attr("cy"));
+                let coloc = 1 / ((locx ** 2 + locy ** 2) ** 0.5);
+                locx *= coloc, locy *= coloc;
+                if(performance.now() > just_collided[i][0] + t00 && check_player) {
+                    if(((parseFloat(player[i].p.attr("cx")) - parseFloat(b.attr("cx"))) ** 2 + (parseFloat(player[i].p.attr("cy")) - parseFloat(b.attr("cy"))) ** 2 <= (p_r + b_r) ** 2)) {
+                        let bvx0 = bd.sx,
+                            bvy0 = bd.sy,
+                            pvx0 = player[i].pd.sx,
+                            pvy0 = player[i].pd.sy;
+                        let dot_b = (bvx0 * locx + bvy0 * locy);
+                        let dot_p = (pvx0 * locx + pvy0 * locy);
+                        let bvx = dot_b * locx,
+                            bvy = dot_b * locy,
+                            pvx = dot_p * locx,
+                            pvy = dot_p * locy;
+                        console.log("before: ", bd.sx, bd.sy);
+                        if(dot_b * dot_p > 0 && less_bug != 0){
+                            bd.sx += - less_bug * bvx + less_bug * pvx;
+                            bd.sy += - less_bug * bvy + less_bug * pvy;
+                        }
+                        else {
+                            bd.sx += -2 * bvx + 2 * pvx;
+                            bd.sy += -2 * bvy + 2 * pvy;
+                        }
+                        console.log("after: ", bd.sx, bd.sy);
+                        just_collided[i][0] = performance.now();
+                    }
+                }
+                
+
+                if(performance.now() > just_collided[i][1] + t00 && check_weapon) {
+                    if(((parseFloat(player[i].w.attr("cx")) - parseFloat(b.attr("cx"))) ** 2 + (parseFloat(player[i].w.attr("cy")) - parseFloat(b.attr("cy"))) ** 2 <= (w_r + b_r) ** 2)) {
+                        let bvx0 = bd.sx,
+                            bvy0 = bd.sy,
+                            wvx0 = player[i].wd.sx,
+                            wvy0 = player[i].wd.sy;
+                        let dot_b = (bvx0 * locx + bvy0 * locy);
+                        let dot_w = (wvx0 * locx + wvy0 * locy);
+                        let bvx = dot_b * locx,
+                            bvy = dot_b * locy,
+                            wvx = dot_w * locx,
+                            wvy = dot_w * locy;
+                        console.log("before: ", bd.sx, bd.sy);
+                        if(dot_b * dot_w > 0 && less_bug != 0) {
+                            bd.sx += - less_bug * bvx + less_bug * wvx;
+                            bd.sy += - less_bug * bvy + less_bug * wvy;
+                        }
+                        else {
+                            bd.sx += - 2 * bvx + 2 * wvx;
+                            bd.sy += - 2 * bvy + 2 * wvy;
+                        }
+                        console.log("after: ", bd.sx, bd.sy);
+                        just_collided[i][1] = performance.now();
+                    }
+                }
+
+            }
+        }
+
+        function check_score() {
+            let x_bound = 20;
+            if(parseFloat(b.attr("cx")) < x_bound && parseFloat(b.attr("cy")) > 0 && parseFloat(b.attr("cy")) < svg_height){
+                exist = 0;
+                left_score ++;
+                return -1;
+            }
+            if(parseFloat(b.attr("cx")) > svg_width - x_bound && parseFloat(b.attr("cy")) > 0 && parseFloat(b.attr("cy")) < svg_height) {
+                exist = 0;
+                right_score ++;
+                return 1;
+            }
+            return 0;
+        }
+        function update_all_about_the_ball() {
+            if(!exist) return ;
+            f(b, bd, 0);
+            check_collision();
+            check_score();
+        }
+
+        ball_count ++;
+        return {
+            f: f,
+            update_all_about_the_ball: update_all_about_the_ball,
+            b: b,
+            bd: bd
+        };
+
+    }
+    balls = [];
+
+    function update_score() {
+        $("#score").text(left_score + ':' + right_score);
+    }
+    function update_all() {
+        for(let i = 0; i <= player_count - 1; i++) {
+            if(player[i].update_all_about_the_player()) return ;
+        }
+        for(let i = 0; i <= ball_count - 1; i ++) {{
+            balls[i].update_all_about_the_ball();
+        }}
+        update_score();
+        //console.log(balls[ball_count - 1].b.attr("cx"), balls[ball_count - 1].b.attr("cx"));
+        //console.log(balls[ball_count - 1].bd.sx, balls[ball_count - 1].bd.sy);
+        setTimeout(update_all, t);
+    }
+
+    function generate_balls() {
+        balls.push(create_ball());
+        setTimeout(generate_balls, Math.random() * 5000 + 0);
+        //setTimeout(generate_balls, Math.random() * 500);
+    }
+    $(function() {
+        for(let i = 0; i <= num_player - 1; i ++)
+            player.push(create_player());
+        $(document).off("keydown");
+        generate_balls();
+        set_key();
+        update_all();
+    });
+
+
+</script>
+
+
+
+</body>
