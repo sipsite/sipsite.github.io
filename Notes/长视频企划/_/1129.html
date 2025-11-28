@@ -19,6 +19,10 @@
             padding: 3rem 1.5rem 4rem;
         }
         .page-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
             margin-bottom: 2.2rem;
         }
         .page-header h1 {
@@ -28,7 +32,7 @@
             color: #1d4742;
         }
         .page-nav {
-            margin-top: 0.75rem;
+            margin-top: 0;
             font-size: 0.95rem;
             color: #4d4d4d;
         }
@@ -70,11 +74,28 @@
         .note-content > *:last-child {
             margin-bottom: 0;
         }
+        .note-directory ul {
+            list-style: none;
+            margin: 0;
+            padding-left: 1.25rem;
+        }
         .note-directory > ul {
-            margin-top: 0.75rem;
+            margin: 0.75rem 0 0;
+            padding-left: 0;
         }
         .note-directory ul ul {
             margin-top: 0.4rem;
+        }
+        .note-directory li {
+            position: relative;
+            padding-left: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+        .note-directory li::before {
+            content: "-";
+            position: absolute;
+            left: 0;
+            color: #207b72;
         }
         .note-folder {
             font-weight: 600;
@@ -85,6 +106,13 @@
             color: #666;
         }
         @media (max-width: 720px) {
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .page-nav {
+                margin-top: 0.5rem;
+            }
             .page-card {
                 padding: 2rem 1.75rem;
             }
@@ -112,7 +140,11 @@
             <p>CMU<br />
             - 机器狗高速避障<br />
                 - （RSS）<br />
-                - </p>
+                - 做<br />
+                - 压力影响皮肤状态<br />
+            - 人形机器人<br />
+                - 全身遥操作<br />
+                - 站住</p>
             </article>
         </main>
     </div>
