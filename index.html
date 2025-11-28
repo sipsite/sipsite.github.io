@@ -119,6 +119,33 @@
             margin-bottom: 0.5em;
         }
 
+        .button-link {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 0.6em 1.2em;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .button-link:hover {
+            background-color: #1d8b81;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .button-link.secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .button-link.secondary:hover {
+            background-color: #edf7f6;
+            color: #1d8b81;
+        }
+
         a {
             color: #26a69a;
             text-decoration: none;
@@ -176,6 +203,7 @@
                     <li><a href="#language">Language Proficiency</a></li>
                     <li><a href="#projects">Experiences</a></li>
                     <li><a href="#fun-facts">Fun Facts</a></li>
+                    <li><a href="Notes/notes_index.html">Notes</a></li>
                     <li><a href="#contact">Contact Info</a></li>
                 </ul>
             </nav>
@@ -238,8 +266,16 @@
                     <li>Welcome to play my <a href="2.html">game</a> (which is a group project of COMP4021).</li>
                     -->
                 </ul>
-                
-                
+            </section>
+
+            <section id="notes">
+                <h2>Notes</h2>
+                <!-- NOTES-START -->
+                <p>目前共有 1 篇笔记，整理出 1 个分类。</p>
+                <a class="button-link" href="Notes/notes_index.html">打开笔记目录</a>
+            <!-- NOTES-END -->
+            </section>
+
 
             <section id="contact">
                 <h2>Contact Info</h2>
