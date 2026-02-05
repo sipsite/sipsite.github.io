@@ -1,38 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotlinks for Personal Use</title>
+    <style>
+        :root {
+            --color-primary: #26a69a;
+            --color-light-bg: #e0f2f1;
+            --color-hover: #00796b;
+            --color-text: #333;
+            --color-light-gray: #f8f8f8;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-light-gray);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            padding: 2em;
+        }
 
+        header {
+            text-align: center;
+            padding: 1em 0;
+            margin-bottom: 2em;
+            background-color: var(--color-light-bg);
+            border-bottom: 3px solid var(--color-primary);
+        }
+
+        header h1 {
+            color: var(--color-primary);
+            margin: 0.2em 0;
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-hover);
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 1.2em;
+        }
+
+        li {
+            margin-bottom: 0.4em;
+        }
+    </style>
 </head>
 <body>
-
-<h1>Hotlinks for Personal Use</h1>
-    <ul>
-        <li><a href="https://canvas.ust.hk/">Canvas</a>
-            <ul>
-                <li><a href="https://canvas.ust.hk/courses/69446">MATH4023</a></li>
-            </ul>
-        </li>
-        <li>HOTLINKS for STUDENT
-            <ul>
-                <li><a href="https://sisprod.psft.ust.hk/psp/SISPROD/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?pslnkid=Z_HC_SSS_STUDENT_CENTER_LNK&FolderPath=PORTAL_ROOT_OBJECT.Z_HC_SSS_STUDENT_CENTER_LNK&IsFolder=false&IgnoreParamTempl=FolderPath%2cIsFolder">Student Center</a></li>
-                <li><a href="https://w5.ab.ust.hk/wcq/cgi-bin/2540/">Class Schedule</a></li>l
-                <li><a href="https://admlu65.ust.hk/">Timetable Planner</a></li>
-                <li><a href="https://library.hkust.edu.hk/open-hours">Library Hours</a></li>
-                <li><a href="https://comdir.ust.hk/search?keyword=&acct_type=student">UST Student Quick Search</a></li>
-            </ul>
-        </li>
-        <li><a href="https://outlook.office365.com/mail/">Outlook</a></li>
-        <li>Misc
-            <ul>
-                <li><a href="https://coolors.co/1a1f16-1e3f20-345830-4a7856-94ecbe">Coolors</a></li>
-            </ul>
-        </li>
-    </ul>
-
-
+    <div class="container">
+        <header>
+            <h1>Hotlinks for Personal Use</h1>
+        </header>
+        <ul>
+            <li><a href="https://canvas.ust.hk/">Canvas</a>
+                <ul>
+                    <li><a href="https://canvas.ust.hk/courses/69446">MATH4023</a></li>
+                </ul>
+            </li>
+            <li>HOTLINKS for STUDENT
+                <ul>
+                    <li><a href="https://sisprod.psft.ust.hk/psp/SISPROD/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?pslnkid=Z_HC_SSS_STUDENT_CENTER_LNK&FolderPath=PORTAL_ROOT_OBJECT.Z_HC_SSS_STUDENT_CENTER_LNK&IsFolder=false&IgnoreParamTempl=FolderPath%2cIsFolder">Student Center</a></li>
+                    <li><a href="https://w5.ab.ust.hk/wcq/cgi-bin/2540/">Class Schedule</a></li>
+                    <li><a href="https://admlu65.ust.hk/">Timetable Planner</a></li>
+                    <li><a href="https://library.hkust.edu.hk/open-hours">Library Hours</a></li>
+                    <li><a href="https://comdir.ust.hk/search?keyword=&acct_type=student">UST Student Quick Search</a></li>
+                </ul>
+            </li>
+            <li><a href="https://outlook.office365.com/mail/">Outlook</a></li>
+            <li>Misc
+                <ul>
+                    <li><a href="https://coolors.co/1a1f16-1e3f20-345830-4a7856-94ecbe">Coolors</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </body>
-
 </html>
