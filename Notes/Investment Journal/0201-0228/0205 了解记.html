@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>include<bits.stdc++.h> - Notes</title>
+    <title>0205 了解记 - Notes</title>
     <style>
+        :root {
+            --color-primary: #26a69a;
+            --color-hover: #4db6ac;
+            --color-bg: #12181b;
+            --color-surface: #171d20;
+            --color-surface-alt: #1c2225;
+            --color-surface-hover: #243034;
+            --color-text: #e6eaed;
+            --color-muted: #9aa3a7;
+            --color-border: #223034;
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             margin: 0;
             padding: 0;
-            background-color: #f5f7f6;
-            color: #1a1a1a;
+            background-color: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.65;
         }
         .page-wrapper {
@@ -29,15 +40,15 @@
             margin: 0;
             font-size: 2rem;
             font-weight: 650;
-            color: #1d4742;
+            color: var(--color-primary);
         }
         .page-nav {
             margin-top: 0;
             font-size: 0.95rem;
-            color: #4d4d4d;
+            color: var(--color-muted);
         }
         .page-nav a {
-            color: #207b72;
+            color: var(--color-primary);
             text-decoration: none;
             margin-right: 1rem;
         }
@@ -45,28 +56,60 @@
             text-decoration: underline;
         }
         .page-card {
-            background-color: #ffffff;
+            background-color: var(--color-surface);
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(18, 62, 57, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
             padding: 2.5rem 2.75rem;
         }
         .page-card p {
             max-width: 680px;
         }
-        .page-card ul {
-            margin-left: 1.25rem;
-        }
-        .page-card li {
-            margin-bottom: 0.45rem;
-        }
         a {
-            color: #207b72;
+            color: var(--color-primary);
             text-decoration: none;
             transition: color 0.2s ease;
         }
         a:hover {
-            color: #15574f;
+            color: var(--color-hover);
             text-decoration: underline;
+        }
+        .note-content ul,
+        .note-content ol {
+            margin: 0 0 1rem;
+            padding-left: 0;
+        }
+        .note-content ul > li,
+        .note-content ol > li {
+            background: var(--color-surface-alt);
+            margin-bottom: 0.6rem;
+            padding: 0.65rem 0.85rem;
+            border-radius: 10px;
+            border-left: 4px solid transparent;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .note-content ul > li {
+            list-style: none;
+        }
+        .note-content ol {
+            padding-left: 1.5rem;
+        }
+        .note-content ul > li:hover,
+        .note-content ol > li:hover {
+            background: var(--color-surface-hover);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+            transform: translateX(4px);
+            border-left-color: var(--color-primary);
+        }
+        .note-content li > ul,
+        .note-content li > ol {
+            margin-top: 0.6rem;
+            padding-left: 1.25rem;
+        }
+        .note-content li li {
+            background: transparent;
+            border-left-color: var(--color-border);
+            box-shadow: none;
+            transform: none;
         }
         .note-content > *:first-child {
             margin-top: 0;
@@ -77,33 +120,38 @@
         .note-directory ul {
             list-style: none;
             margin: 0;
-            padding-left: 1.25rem;
+            padding-left: 1.1rem;
+            border-left: 1px solid var(--color-border);
         }
         .note-directory > ul {
             margin: 0.75rem 0 0;
             padding-left: 0;
+            border-left: none;
         }
         .note-directory ul ul {
             margin-top: 0.4rem;
         }
         .note-directory li {
             position: relative;
-            padding-left: 0.9rem;
-            margin-bottom: 0.4rem;
+            padding-left: 0.75rem;
+            margin-bottom: 0.35rem;
         }
         .note-directory li::before {
-            content: "-";
+            content: "";
             position: absolute;
-            left: 0;
-            color: #207b72;
+            left: -0.85rem;
+            top: 0.95rem;
+            width: 0.55rem;
+            height: 1px;
+            background: var(--color-border);
         }
         .note-folder {
             font-weight: 600;
-            color: #1d4742;
+            color: var(--color-primary);
         }
         .directory-empty {
             font-style: italic;
-            color: #666;
+            color: var(--color-muted);
         }
         @media (max-width: 720px) {
             .page-header {
@@ -122,47 +170,12 @@
 <body>
     <div class="page-wrapper">
         <header class="page-header">
-            <h1>include<bits.stdc++.h></h1>
+            <h1>0205 了解记</h1>
             <nav class="page-nav"><a href="../../../index.html">Home</a> | <a href="../../notes_index.html">Notes Index</a></nav>
         </header>
         <main class="page-card">
             <article class="note-content">
-            <p>11</p>
-            <ul>
-            <li>1</li>
-            <li>1<ul>
-            <li>111<ul>
-            <li>1111</li>
-            <li>111</li>
-            </ul>
-            </li>
-            </ul>
-            </li>
-            <li>111</li>
-            </ul>
-            <p>111</p>
-            <ul>
-            <li>111</li>
-            </ul>
-            <ol>
-            <li>111<ol>
-            <li>12121212121</li>
-            </ol>
-            </li>
-            </ol>
-            <p>a. 11111</p>
-            <p>asdfajsdpfasdfj</p>
-            <p>1<br />
-            111</p>
-            <p>111</p>
-            <pre class="codehilite"><code>for(int i = 1; i &lt;= n; i++)
-            </code></pre>
 
-            <p>112121212</p>
-            <p>哇！<strong>这很好了</strong>。</p>
-            <p>$$<br />
-            \mu_n=N_1+C_t^{2^2}\int<br />
-            $$</p>
             </article>
         </main>
     </div>
