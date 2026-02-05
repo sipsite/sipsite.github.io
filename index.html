@@ -7,21 +7,22 @@
     <style>
         /* Global Styles */
         :root {
-            /* 定义主色调（浅绿色） */
-            --primary-color: #26a69a; 
-            
-            /* 定义背景色（浅色） */
-            --light-background: #e0f2f1;
-            
-            /* 定义文字颜色（深色） */
-            --text-color: #333;
+            --primary-color: #26a69a;
+            --hover-color: #4db6ac;
+            --bg-color: #12181b;
+            --surface-color: #171d20;
+            --surface-alt: #1c2225;
+            --surface-hover: #243034;
+            --text-color: #e6eaed;
+            --muted-color: #9aa3a7;
+            --border-color: #223034;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             margin: 0;
             padding: 0;
-            background-color: #f8f8f8; /* Light gray background */
-            color: black;/* #333 */
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
@@ -31,14 +32,14 @@
             min-height: 100vh; /* Ensure content fills the viewport height */
             max-width: 1200px; /* Limit maximum width */
             margin: 0 auto; /* Center the container */
-            background-color: #fff; /* Main content white background */
-            box-shadow: 0 0 10px rgba(0,0,0,0.05); /* Soft shadow */
+            background-color: var(--surface-color);
+            box-shadow: 0 0 10px rgba(0,0,0,0.45);
         }
 
         /* Sidebar Styles */
         .sidebar {
             width: 280px; /* Sidebar width */
-            background-color: #e0f2f1; /* Light green background */
+            background-color: var(--surface-alt);
             padding: 2em;
             box-sizing: border-box; 
             display: flex;
@@ -49,7 +50,7 @@
         }
 
         .sidebar h2 {
-            color: #26a69a; /* Deeper green color */
+            color: var(--primary-color);
             margin-top: 0;
             margin-bottom: 0.5em;
         }
@@ -60,7 +61,7 @@
             border-radius: 50%; /* Circular photo */
             object-fit: cover; 
             margin-bottom: 1.5em;
-            border: 3px solid #b2dfdb; /* Light green border */
+            border: 3px solid var(--border-color);
         }
 
         .sidebar-nav ul {
@@ -75,14 +76,14 @@
 
         .sidebar-nav a {
             text-decoration: none;
-            color: #26a69a; /* Link color */
+            color: var(--primary-color);
             font-weight: bold;
             font-size: 1.1em;
             transition: color 0.3s ease;
         }
 
         .sidebar-nav a:hover {
-            color: #43C59E; /* Hover color */
+            color: var(--hover-color);
         }
 
         /* Main Content Area Styles */
@@ -93,14 +94,14 @@
         }
 
         .main-content h1 {
-            color: #26a69a;
-            border-bottom: 2px solid #b2dfdb; /* Title underline */
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5em;
             margin-top: 0;
         }
 
         .main-content h2 {
-            color: #4db6ac; /* Slightly darker title color */
+            color: var(--hover-color);
             margin-top: 1.5em;
             margin-bottom: 0.8em;
         }
@@ -142,24 +143,24 @@
         }
 
         .button-link.secondary:hover {
-            background-color: #edf7f6;
-            color: #1d8b81;
+            background-color: var(--surface-hover);
+            color: var(--hover-color);
         }
 
         a {
-            color: #26a69a;
+            color: var(--primary-color);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         a:hover {
-            color: #43C59E; /*#00796b */
+            color: var(--hover-color); /*#00796b */
             text-decoration: underline;
         }
 
         .rednote-link {
             font-weight: bold;
-            color: #26a69a; /* Red emphasis for Xiaohongshu link */
+            color: var(--primary-color);
         }
 
         /* Mobile Adaptation */

@@ -7,11 +7,15 @@
     <style>
         /* CSS Variables for Theme */
         :root {
-            --color-primary: #26a69a;       /* Main color (Teal/浅绿) */
-            --color-light-bg: #e0f2f1;      /* Light background (Sidebar/Header) */
-            --color-hover: #00796b;         /* Hover color/Darker Teal */
-            --color-text: #333;             /* Dark text color */
-            --color-light-gray: #f8f8f8;    /* Page background */
+            --color-primary: #26a69a;
+            --color-hover: #4db6ac;
+            --color-bg: #12181b;
+            --color-surface: #171d20;
+            --color-surface-alt: #1c2225;
+            --color-surface-hover: #243034;
+            --color-text: #e6eaed;
+            --color-muted: #9aa3a7;
+            --color-border: #223034;
         }
 
         /* Global Styles */
@@ -19,7 +23,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--color-light-gray);
+            background-color: var(--color-bg);
             color: var(--color-text);
             line-height: 1.6;
         }
@@ -28,8 +32,8 @@
         .container {
             max-width: 1200px; 
             margin: 0 auto; 
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.05); 
+            background-color: var(--color-surface);
+            box-shadow: 0 0 10px rgba(0,0,0,0.45);
             padding: 2em;
         }
 
@@ -38,7 +42,7 @@
             text-align: center;
             padding: 1em 0;
             margin-bottom: 2em;
-            background-color: var(--color-light-bg);
+            background-color: var(--color-surface-alt);
             border-bottom: 3px solid var(--color-primary);
         }
 
@@ -53,22 +57,22 @@
             border-collapse: collapse; /* Collapse borders into a single line */
             margin-top: 1.5em;
             margin-bottom: 2em;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.35);
         }
 
         /* Table Header (Year/Semester) Styles */
         .study-plan-table th {
-            background-color: var(--color-primary);
+            background-color: var(--color-surface-alt);
             color: white;
             padding: 10px;
             text-align: left;
-            border: 1px solid var(--color-hover);
+            border: 1px solid var(--color-border);
         }
 
         /* Table Cells Styles */
         .study-plan-table td {
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--color-border);
             vertical-align: top;
         }
 
@@ -80,20 +84,20 @@
 
         /* Stripe effect for table rows */
         .study-plan-table tr:nth-child(even) td {
-            background-color: #f3fcfb; /* Very light teal for even rows */
+            background-color: var(--color-surface-alt);
         }
         
         /* Highlight row on hover */
         .study-plan-table tr:hover td {
-            background-color: #e6f7f6; /* Slightly darker teal on hover */
+            background-color: var(--color-surface-hover);
         }
 
         /* Special styling for semester headers in the table */
         .semester-header {
-            background-color: #b2dfdb !important; /* Lighter primary color for semester rows */
+            background-color: var(--color-surface-alt) !important;
             font-weight: bold;
             text-align: center !important;
-            color: var(--color-hover);
+            color: var(--color-primary);
         }
         
         .semester-header td:first-child {
@@ -103,7 +107,7 @@
         /* Credits summary */
         .credits-summary {
             padding: 1em;
-            background-color: var(--color-light-bg);
+            background-color: var(--color-surface-alt);
             border-radius: 5px;
             margin-top: 1em;
             text-align: center;
@@ -124,12 +128,12 @@
                 left: -9999px;
             }
             .study-plan-table tr {
-                border: 1px solid #ccc;
+                border: 1px solid var(--color-border);
                 margin-bottom: 1em;
             }
             .study-plan-table td {
                 border: none;
-                border-bottom: 1px solid #eee;
+                border-bottom: 1px solid var(--color-border);
                 position: relative;
                 padding-left: 50%; /* Make space for the label */
                 text-align: right;
@@ -144,7 +148,7 @@
                 white-space: nowrap;
                 text-align: left;
                 font-weight: bold;
-                color: var(--color-primary);
+                color: var(--color-surface-alt);
             }
             .study-plan-table td:nth-of-type(1):before { content: "Course Code"; }
             .study-plan-table td:nth-of-type(2):before { content: "Course Name"; }
