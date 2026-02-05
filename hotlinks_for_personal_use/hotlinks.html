@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotlinks for Personal Use</title>
     <style>
+        ul {
+        list-style: none; 
+        padding: 0;
+        }
+
+        li {
+        background: #f8f9fa;
+        margin-bottom: 8px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        border-left: 4px solid transparent; 
+        }
+
+        li:hover {
+        background: #ffffff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transform: translateX(5px); 
+        border-left: 4px solid #00a19a; 
+        }
+
+        a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        }
         :root {
             --color-primary: #26a69a;
             --color-light-bg: #e0f2f1;
@@ -43,24 +69,6 @@
             margin: 0.2em 0;
         }
 
-        a {
-            color: var(--color-primary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--color-hover);
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 1.2em;
-        }
-
-        li {
-            margin-bottom: 0.4em;
-        }
     </style>
 </head>
 <body>
